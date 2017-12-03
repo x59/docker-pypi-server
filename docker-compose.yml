@@ -1,0 +1,23 @@
+version: '3.3'
+
+services:
+  pypi:
+    image: mosquito/pypi-server:latest
+    ports:
+      - "8080:80"
+    env_file:
+      - pypi.env
+    volumes:
+      - pypi-data:/usr/lib/pypi-server
+    restart: always
+  db:
+    image: postgres:10.1
+    env_file:
+      - postgres.env
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  pypi-data:
+  db-data:
